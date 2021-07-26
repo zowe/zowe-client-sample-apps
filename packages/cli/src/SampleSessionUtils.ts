@@ -14,6 +14,7 @@ import {
   Logger,
   ISession,
 } from "@zowe/imperative";
+import { HTTP_PROTOCOL_CHOICES } from "@zowe/imperative/lib/rest/src/session/SessConstants";
 
 export class SampleSessionUtils {
   public static SAMPLE_CONNECTION_OPTION_GROUP = "Sample Connection Options";
@@ -103,13 +104,13 @@ export class SampleSessionUtils {
   public static createSessCfgFromArgs(args: ICommandArguments): ISession {
     this.log.debug("Creating a sample session from arguments");
     return {
-      hostname: args.host,
-      port: args.port,
-      user: args.user,
-      password: args.password,
-      basePath: args.basePath,
-      rejectUnauthorized: args.rejectUnauthorized,
-      protocol: args.protocol || "https",
+      hostname: args.host as string,
+      port: args.port as number,
+      user: args.user as string,
+      password: args.password as string,
+      basePath: args.basePath as string,
+      rejectUnauthorized: args.rejectUnauthorized as boolean,
+      protocol: (args.protocol as HTTP_PROTOCOL_CHOICES) || "https",
     };
   }
 

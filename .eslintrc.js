@@ -6,7 +6,7 @@ module.exports = {
     'jest'
   ],
   parserOptions: {
-  //   tsconfigRootDir: __dirname,
+    // tsconfigRootDir: __dirname,
     project: ['./packages/*/tsconfig.json'],
   },
   extends: [

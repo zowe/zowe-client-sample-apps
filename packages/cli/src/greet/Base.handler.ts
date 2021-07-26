@@ -38,7 +38,7 @@ export default abstract class BaseHandler implements ICommandHandler {
 
   protected mHandlerParams: IHandlerParameters;
 
-  public async process(commandParameters: IHandlerParameters) {
+  public async process(commandParameters: IHandlerParameters): Promise<void> {
     this.mHandlerParams = commandParameters;
 
     const sessCfg: ISession = SampleSessionUtils.createSessCfgFromArgs(
@@ -56,7 +56,7 @@ export default abstract class BaseHandler implements ICommandHandler {
     await this.processCmd(commandParameters);
   }
 
-  public fail(err: IImperativeError) {
+  public fail(err: IImperativeError): void {
     throw new ImperativeError(err);
   }
 
@@ -76,7 +76,7 @@ export default abstract class BaseHandler implements ICommandHandler {
     return this.mHandlerParams.response.progress;
   }
 
-  public abstract async processCmd(
+  public abstract processCmd(
     commandParameters: IHandlerParameters
   ): Promise<void>;
 }

@@ -24,7 +24,7 @@ export class Greeting {
       "Required session must be defined"
     );
 
-    let url;
+    let url: string;
     if (session.ISession.basePath == null || session.ISession.basePath === "") {
       url = this.context + this.contentResource;
     } else {

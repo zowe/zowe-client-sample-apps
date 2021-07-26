@@ -10,12 +10,15 @@
 
 import { IImperativeError, RestClient, TextUtils } from "@zowe/imperative";
 
+interface IError {
+  stack?: string;
+}
 export class SampleRestClient extends RestClient {
   protected processError(original: IImperativeError): IImperativeError {
     original.msg = "Sample REST API Error:\n" + original.msg;
-    let details = original.causeErrors;
+    let details: string = original.causeErrors as string;
     try {
-      const json = JSON.parse(details);
+      const json: IError = JSON.parse(details) as IError;
       // if we didn't get an error trying to parse json, check if there is a stack
       // on the JSON error and delete it
       if (json.stack != null) {
