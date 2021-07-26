@@ -1,0 +1,23 @@
+{
+    "$schema": "./zowe.schema.json",
+    "profiles": {
+        "sample": {
+            "type": "sample",
+            "properties": {
+                "host": "localhost",
+                "rejectUnauthorized": false,
+                "port": 10080,
+                "user": "zowe",
+                "password": "zowe",
+            },
+            // "secure": [
+            //     "user",
+            //     "password",
+            // ]
+        }
+    },
+    "defaults": {
+        "sample": "sample"
+    },
+    "plugins": []
+}

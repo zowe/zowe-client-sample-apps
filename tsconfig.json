@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2019",
+    "lib": [
+      "ES2019"
+    ],
+    // "outDir": "out",
+    // "rootDir": "src",
+    "sourceMap": true,
+    "composite": true,
+  },
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "packages/api"
+    },
+    {
+      "path": "packages/cli"
+    },
+    {
+      "path": "packages/vsce"
+    },
+  ]
+}

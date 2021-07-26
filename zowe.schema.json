@@ -1,0 +1,1087 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$version": 3,
+    "type": "object",
+    "description": "config",
+    "properties": {
+        "profiles": {
+            "type": "object",
+            "description": "named profiles config",
+            "patternProperties": {
+                "^\\S*$": {
+                    "type": "object",
+                    "description": "a profile",
+                    "properties": {
+                        "type": {
+                            "description": "the profile type",
+                            "type": "string"
+                        },
+                        "properties": {
+                            "description": "the profile properties",
+                            "type": "object"
+                        },
+                        "profiles": {
+                            "description": "additional sub-profiles",
+                            "type": "object",
+                            "$ref": "#/properties/profiles"
+                        },
+                        "secure": {
+                            "description": "secure property names",
+                            "type": "array",
+                            "prefixItems": {
+                                "type": "string"
+                            },
+                            "uniqueItems": true
+                        }
+                    },
+                    "allOf": [
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "zosmf"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "z/OSMF Profile",
+                                        "description": "z/OSMF Profile",
+                                        "properties": {
+                                            "host": {
+                                                "type": "string",
+                                                "description": "The z/OSMF server host name."
+                                            },
+                                            "port": {
+                                                "type": "number",
+                                                "description": "The z/OSMF server port.",
+                                                "default": 443
+                                            },
+                                            "user": {
+                                                "type": "string",
+                                                "description": "Mainframe (z/OSMF) user name, which can be the same as your TSO login."
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "description": "Mainframe (z/OSMF) password, which can be the same as your TSO password."
+                                            },
+                                            "rejectUnauthorized": {
+                                                "type": "boolean",
+                                                "description": "Reject self-signed certificates.",
+                                                "default": true
+                                            },
+                                            "basePath": {
+                                                "type": "string",
+                                                "description": "The base path for your API mediation layer instance. Specify this option to prepend the base path to all z/OSMF resources when making REST requests. Do not specify this option if you are not using an API mediation layer."
+                                            },
+                                            "protocol": {
+                                                "type": "string",
+                                                "description": "The protocol used (HTTP or HTTPS)",
+                                                "default": "https",
+                                                "enum": [
+                                                    "http",
+                                                    "https"
+                                                ]
+                                            },
+                                            "encoding": {
+                                                "type": "number",
+                                                "description": "The encoding for download and upload of z/OS data set and USS files. The default encoding if not specified is 1047."
+                                            },
+                                            "responseTimeout": {
+                                                "type": "number",
+                                                "description": "The maximum amount of time in seconds the z/OSMF Files TSO servlet should run before returning a response. Any request exceeding this amount of time will be terminated and return an error. Allowed values: 5 - 600"
+                                            }
+                                        },
+                                        "required": []
+                                    },
+                                    "secure": {
+                                        "prefixItems": {
+                                            "enum": [
+                                                "user",
+                                                "password"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "tso"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "TSO Profile",
+                                        "description": "z/OS TSO/E User Profile",
+                                        "properties": {
+                                            "account": {
+                                                "type": "string",
+                                                "description": "Your z/OS TSO/E accounting information."
+                                            },
+                                            "characterSet": {
+                                                "type": "string",
+                                                "description": "Character set for address space to convert messages and responses from UTF-8 to EBCDIC.",
+                                                "default": "697"
+                                            },
+                                            "codePage": {
+                                                "type": "string",
+                                                "description": "Codepage value for TSO/E address space to convert messages and responses from UTF-8 to EBCDIC.",
+                                                "default": "1047"
+                                            },
+                                            "columns": {
+                                                "type": "number",
+                                                "description": "The number of columns on a screen.",
+                                                "default": 80
+                                            },
+                                            "logonProcedure": {
+                                                "type": "string",
+                                                "description": "The logon procedure to use when creating TSO procedures on your behalf.",
+                                                "default": "IZUFPROC"
+                                            },
+                                            "regionSize": {
+                                                "type": "number",
+                                                "description": "Region size for the TSO/E address space.",
+                                                "default": 4096
+                                            },
+                                            "rows": {
+                                                "type": "number",
+                                                "description": "The number of rows on a screen.",
+                                                "default": 24
+                                            }
+                                        },
+                                        "required": []
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "ssh"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "z/OS SSH Profile",
+                                        "description": "z/OS SSH Profile",
+                                        "properties": {
+                                            "host": {
+                                                "type": "string",
+                                                "description": "The z/OS SSH server host name."
+                                            },
+                                            "port": {
+                                                "type": "number",
+                                                "description": "The z/OS SSH server port.",
+                                                "default": 22
+                                            },
+                                            "user": {
+                                                "type": "string",
+                                                "description": "Mainframe user name, which can be the same as your TSO login."
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "description": "Mainframe password, which can be the same as your TSO password."
+                                            },
+                                            "privateKey": {
+                                                "type": "string",
+                                                "description": "Path to a file containing your private key, that must match a public key stored in the server for authentication"
+                                            },
+                                            "keyPassphrase": {
+                                                "type": "string",
+                                                "description": "Private key passphrase, which unlocks the private key."
+                                            },
+                                            "handshakeTimeout": {
+                                                "type": "number",
+                                                "description": "How long in milliseconds to wait for the SSH handshake to complete."
+                                            }
+                                        },
+                                        "required": []
+                                    },
+                                    "secure": {
+                                        "prefixItems": {
+                                            "enum": [
+                                                "password",
+                                                "keyPassphrase"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "idms"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "CA IDMS Profile",
+                                        "description": "Persistent information pertaining to CA IDMS",
+                                        "properties": {
+                                            "host": {
+                                                "type": "string",
+                                                "description": "The API ML server host name."
+                                            },
+                                            "port": {
+                                                "type": "number",
+                                                "description": "The API ML server port.",
+                                                "default": 443
+                                            },
+                                            "user": {
+                                                "type": "string",
+                                                "description": "Mainframe (z/OSMF) user name, which can be the same as your TSO login."
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "description": "Mainframe (z/OSMF) password, which can be the same as your TSO password."
+                                            },
+                                            "rejectUnauthorized": {
+                                                "type": "boolean",
+                                                "description": "Reject self-signed certificates.",
+                                                "default": true
+                                            },
+                                            "tokenType": {
+                                                "type": "string",
+                                                "description": "The token type for z/OSMF returned in the HTTP Cookie header, for example: 'LtpaToken2'. The existence of a 'tokenType' indicates that basic authentication will not be used after a token has been obtained."
+                                            },
+                                            "tokenValue": {
+                                                "type": "string",
+                                                "description": "The token value associated with the token type."
+                                            }
+                                        },
+                                        "required": [
+                                            "host"
+                                        ]
+                                    },
+                                    "secure": {
+                                        "prefixItems": {
+                                            "enum": [
+                                                "user",
+                                                "password",
+                                                "tokenValue"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "sysview"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "SYSVIEW REST API connection details",
+                                        "description": "The SYSVIEW session profile schema, where you specify your session information and credentials",
+                                        "properties": {
+                                            "host": {
+                                                "type": "string",
+                                                "description": "The hostname of the SYSVIEW REST API"
+                                            },
+                                            "port": {
+                                                "type": "number",
+                                                "description": "The port number of the SYSVIEW REST API"
+                                            },
+                                            "user": {
+                                                "type": "string",
+                                                "description": "Your z/OS username used to authenticate to the SYSVIEW REST API"
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "description": "Your z/OS password used to authenticate to the SYSVIEW REST API"
+                                            },
+                                            "rejectUnauthorized": {
+                                                "type": "boolean",
+                                                "description": "If set, the server certificate is verified against the list of supplied CAs",
+                                                "default": true
+                                            },
+                                            "ssid": {
+                                                "type": "string",
+                                                "description": "SSID of the SYSVIEW instance. Default value: GSVX",
+                                                "default": "GSVX"
+                                            },
+                                            "basePath": {
+                                                "type": "string",
+                                                "description": "The base path for your API mediation layer instance. Do not specify this option if you are not using an API mediation layer.",
+                                                "default": "/api/v1"
+                                            }
+                                        },
+                                        "required": [
+                                            "host",
+                                            "port",
+                                            "user",
+                                            "password"
+                                        ]
+                                    },
+                                    "secure": {
+                                        "prefixItems": {
+                                            "enum": [
+                                                "user",
+                                                "password"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "sysview-format"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "SYSVIEW display format details",
+                                        "description": "The SYSVIEW format profile schema, where you specify display settings",
+                                        "properties": {
+                                            "contextFields": {
+                                                "type": "array",
+                                                "description": "Context fields to display. Defaults to hiding all context"
+                                            },
+                                            "overview": {
+                                                "type": "boolean",
+                                                "description": "Display the overview section"
+                                            },
+                                            "info": {
+                                                "type": "boolean",
+                                                "description": "Display the information area, if any"
+                                            },
+                                            "pretty": {
+                                                "type": "boolean",
+                                                "description": "Display formatted data"
+                                            },
+                                            "blankIfZero": {
+                                                "type": "boolean",
+                                                "description": "Show a blank space instead of '0' values"
+                                            },
+                                            "truncate": {
+                                                "type": "boolean",
+                                                "description": "Truncate displays that are too wide for the console",
+                                                "default": false
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "rse"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "IBM RSE API Zowe Profile",
+                                        "description": "A profile to issue commands to a z/OS system with a working Zowe REST server,Mediation Layer, or IBM RSE (Remote System Explorer) API server installation.",
+                                        "properties": {
+                                            "host": {
+                                                "type": "string",
+                                                "description": "The z/OS host name running the Zowe REST API."
+                                            },
+                                            "port": {
+                                                "type": "number",
+                                                "description": "The server port used by the REST REST API."
+                                            },
+                                            "user": {
+                                                "type": "string",
+                                                "description": "The user name for the Zowe REST API operations."
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "description": "The password of the user for the Zowe REST API operations."
+                                            },
+                                            "rejectUnauthorized": {
+                                                "type": "boolean",
+                                                "description": "Reject self-signed certificates.",
+                                                "default": true
+                                            },
+                                            "basePath": {
+                                                "type": "string",
+                                                "description": "The base path of the API for the REST API operations."
+                                            },
+                                            "protocol": {
+                                                "type": "string",
+                                                "description": "http or https, the default, depending whether a TLS handshake is required to access REST API.",
+                                                "default": "https"
+                                            }
+                                        },
+                                        "required": [
+                                            "host"
+                                        ]
+                                    },
+                                    "secure": {
+                                        "prefixItems": {
+                                            "enum": [
+                                                "user",
+                                                "password",
+                                                "basePath",
+                                                "protocol"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "mq"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "CLI profile for MQ",
+                                        "description": "An MQREST profile is required to issue commands in the MQ command group that interacts with MQSC. The mq profile contains your host, port, user name, and password for the IBM MQ System Console interface",
+                                        "properties": {
+                                            "host": {
+                                                "type": "string",
+                                                "description": "The MQ Rest server host name"
+                                            },
+                                            "port": {
+                                                "type": "number",
+                                                "description": "Port number of your MQ REST API server"
+                                            },
+                                            "user": {
+                                                "type": "string",
+                                                "description": "User name to authenticate to your MQ REST API server"
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "description": "Password to authenticate to your MQ REST API server"
+                                            },
+                                            "rejectUnauthorized": {
+                                                "type": "boolean",
+                                                "description": "Reject self-signed certificates.",
+                                                "default": false
+                                            },
+                                            "protocol": {
+                                                "type": "string",
+                                                "description": "Specifies the MQ protocol (http or https).",
+                                                "default": "http",
+                                                "enum": [
+                                                    "http",
+                                                    "https"
+                                                ]
+                                            }
+                                        },
+                                        "required": [
+                                            "host",
+                                            "port",
+                                            "user",
+                                            "password"
+                                        ]
+                                    },
+                                    "secure": {
+                                        "prefixItems": {
+                                            "enum": [
+                                                "user",
+                                                "password"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "jclcheck"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "JCLCheck Profile",
+                                        "description": "A JCLCheck profile is required to issue commands in the jcl command group that interact with JCLCheck. The JCLCheck profile contains your host and port for the JCLCheck instance of your choice.",
+                                        "properties": {
+                                            "host": {
+                                                "type": "string",
+                                                "description": "Host name of the JCLCheck API service that is running on the mainframe system."
+                                            },
+                                            "port": {
+                                                "type": "number",
+                                                "description": "Port for the JCLCheck API service that is running on the mainframe system."
+                                            },
+                                            "user": {
+                                                "type": "string",
+                                                "description": "User name for authenticating connections to the JCLCheck API service that is running on the mainframe system."
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "description": "Password for authenticating connections to the JCLCheck API service that is running on the mainframe system."
+                                            },
+                                            "basePath": {
+                                                "type": "string",
+                                                "description": "The base path for your API mediation layer instance. Specify this option to prepend the base path to all resources when making REST requests. Do not specify this option if you are not using an API mediation layer."
+                                            },
+                                            "rejectUnauthorized": {
+                                                "type": "boolean",
+                                                "description": "Reject self-signed certificates.",
+                                                "default": true
+                                            },
+                                            "protocol": {
+                                                "type": "string",
+                                                "description": "Specifies protocol to use for JCLCheck connection (http or https).",
+                                                "default": "https",
+                                                "enum": [
+                                                    "http",
+                                                    "https"
+                                                ]
+                                            },
+                                            "jclcheckOptions": {
+                                                "type": "string",
+                                                "description": "The desired set of JCLCheck runtime options. Specify the options exactly as you would on the PARM= or OPTIONS DD on a batch run of JCLCheck. See the JCLCheck runtime options documentation for details on available runtime options. If you specify options that change the format of the JCLCheck reports, you should request '--raw-output'. Changing the format of the report will affect the ability to produce a structured API response."
+                                            }
+                                        },
+                                        "required": []
+                                    },
+                                    "secure": {
+                                        "prefixItems": {
+                                            "enum": [
+                                                "user",
+                                                "password"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "qwikref"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "Qwikref Profile",
+                                        "description": "A Qwikref profile is required to issue commands in the jcl command group that interact with Qwikref. The Qwikref profile contains your host and port for the Qwikref instance of your choice.",
+                                        "properties": {
+                                            "host": {
+                                                "type": "string",
+                                                "description": "Host name of the Qwikref API service that is running on the mainframe system."
+                                            },
+                                            "port": {
+                                                "type": "number",
+                                                "description": "Port for the Qwikref API service that is running on the mainframe system.",
+                                                "default": 1689
+                                            },
+                                            "user": {
+                                                "type": "string",
+                                                "description": "User name for authenticating connections to the Qwikref API service that is running on the mainframe system."
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "description": "Password for authenticating connections to the Qwikref API service that is running on the mainframe system."
+                                            },
+                                            "basePath": {
+                                                "type": "string",
+                                                "description": "The base path for your API mediation layer instance. Specify this option to prepend the base path to all resources when making REST requests. Do not specify this option if you are not using an API mediation layer."
+                                            },
+                                            "rejectUnauthorized": {
+                                                "type": "boolean",
+                                                "description": "Reject self-signed certificates.",
+                                                "default": true
+                                            },
+                                            "protocol": {
+                                                "type": "string",
+                                                "description": "Specifies protocol to use for Qwikref connection (http or https).",
+                                                "default": "https",
+                                                "enum": [
+                                                    "http",
+                                                    "https"
+                                                ]
+                                            }
+                                        },
+                                        "required": []
+                                    },
+                                    "secure": {
+                                        "prefixItems": {
+                                            "enum": [
+                                                "user",
+                                                "password"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "ebg"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "CA Endevor Bridge for Bridge Profile",
+                                        "description": "An EBG profile is required to issue commands in the ebg command group. The EBG profile contains the connection details for the CA Endevor Bridge for Git server of your choice.",
+                                        "properties": {
+                                            "protocol": {
+                                                "type": "string",
+                                                "description": "The Endevor Bridge for Git SCM protocol. \n\nDefault value: undefined",
+                                                "enum": [
+                                                    "http",
+                                                    "https"
+                                                ]
+                                            },
+                                            "host": {
+                                                "type": "string",
+                                                "description": "The Endevor Bridge for Git hostname."
+                                            },
+                                            "port": {
+                                                "type": "number",
+                                                "description": "The Endevor Bridge for Git port."
+                                            },
+                                            "user": {
+                                                "type": "string",
+                                                "description": "Endevor Bridge for Git username (your git username)."
+                                            },
+                                            "token": {
+                                                "type": "string",
+                                                "description": "Git personal access token (it can be obtained from your Git Enterprise Server)."
+                                            },
+                                            "rejectUnauthorized": {
+                                                "type": "boolean",
+                                                "description": "Reject self-signed certificates. \n\nDefault value: false"
+                                            }
+                                        }
+                                    },
+                                    "secure": {
+                                        "prefixItems": {
+                                            "enum": [
+                                                "user",
+                                                "token"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "zftp"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "Configuration profile for z/OS FTP",
+                                        "description": "Configuration profile for z/OS FTP",
+                                        "properties": {
+                                            "host": {
+                                                "type": "string",
+                                                "description": "The hostname or IP address of the z/OS server to connect to."
+                                            },
+                                            "port": {
+                                                "type": "number",
+                                                "description": "The port of the z/OS FTP server.",
+                                                "default": 21
+                                            },
+                                            "user": {
+                                                "type": "string",
+                                                "description": "Username for authentication on z/OS"
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "description": "Password to authenticate to FTP."
+                                            },
+                                            "secureFtp": {
+                                                "type": [
+                                                    "boolean",
+                                                    "null"
+                                                ],
+                                                "description": "Set to true for both control and data connection encryption, 'control' for control connection encryption only, or 'implicit' for implicitly encrypted control connection (this mode is deprecated in modern times, but usually uses port 990). Note: Unfortunately, this plugin's functionality only works with FTP and FTPS, not 'SFTP' which is FTP over SSH.",
+                                                "default": true
+                                            },
+                                            "rejectUnauthorized": {
+                                                "type": [
+                                                    "boolean",
+                                                    "null"
+                                                ],
+                                                "description": "Reject self-signed certificates. Only specify this if you are connecting to a secure FTP instance."
+                                            },
+                                            "servername": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "Server name for the SNI (Server Name Indication) TLS extension. Only specify if you are connecting securely"
+                                            },
+                                            "connectionTimeout": {
+                                                "type": "number",
+                                                "description": "How long (in milliseconds) to wait for the control connection to be established.",
+                                                "default": 10000
+                                            }
+                                        }
+                                    },
+                                    "secure": {
+                                        "prefixItems": {
+                                            "enum": [
+                                                "user",
+                                                "password"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "endevor"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "The CA Endevor SCM endevor profile",
+                                        "description": "The CA Endevor SCM endevor profile schema, where you specify your endevor session information and credentials",
+                                        "properties": {
+                                            "host": {
+                                                "type": "string",
+                                                "description": "The hostname of the endevor session"
+                                            },
+                                            "port": {
+                                                "type": "number",
+                                                "description": "The port number of the endevor session"
+                                            },
+                                            "user": {
+                                                "type": "string",
+                                                "description": "The username of the endevor session"
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "description": "The password of the user"
+                                            },
+                                            "protocol": {
+                                                "type": "string",
+                                                "description": "The protocol used for connecting to CA Endevor SCM Rest API",
+                                                "default": "http",
+                                                "enum": [
+                                                    "http",
+                                                    "https"
+                                                ]
+                                            },
+                                            "basePath": {
+                                                "type": "string",
+                                                "description": "The base path used for connecting to CA Endevor SCM Rest API",
+                                                "default": "EndevorService/api/v2"
+                                            },
+                                            "rejectUnauthorized": {
+                                                "type": "boolean",
+                                                "description": "If set, the server certificate is verified against the list of supplied CAs"
+                                            }
+                                        }
+                                    },
+                                    "secure": {
+                                        "prefixItems": {
+                                            "enum": [
+                                                "user",
+                                                "password"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "endevor-location"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "The CA Endevor SCM element inventory location specification profile",
+                                        "description": "The CA Endevor SCM element location, where you specify your working environment, system and subsystem",
+                                        "properties": {
+                                            "instance": {
+                                                "type": "string",
+                                                "description": "The STC/datasource of the session"
+                                            },
+                                            "environment": {
+                                                "type": "string",
+                                                "description": "The CA Endevor SCM environment where your project resides",
+                                                "default": "DEV"
+                                            },
+                                            "system": {
+                                                "type": "string",
+                                                "description": "The CA Endevor SCM system where the element resides"
+                                            },
+                                            "subsystem": {
+                                                "type": "string",
+                                                "description": "The CA Endevor SCM subsystem where your element resides"
+                                            },
+                                            "type": {
+                                                "type": "string",
+                                                "description": "Name of the CA Endevor SCM element's type"
+                                            },
+                                            "stageNumber": {
+                                                "type": "string",
+                                                "description": "The CA Endevor SCM stage where your project resides",
+                                                "enum": [
+                                                    "1",
+                                                    "2"
+                                                ]
+                                            },
+                                            "comment": {
+                                                "type": "string",
+                                                "description": "The CA Endevor SCM comment you want to use when performing an action"
+                                            },
+                                            "ccid": {
+                                                "type": "string",
+                                                "description": "The CA Endevor SCM CCID you want to use when performing an action"
+                                            },
+                                            "maxrc": {
+                                                "type": "number",
+                                                "description": "The return code of CA Endevor SCM that defines a failed action",
+                                                "default": 8
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "sample"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "Sample Profile",
+                                        "description": "A Sample profile is required to issue commands in the sample command group that interact with the Sample REST API. The Sample profile contains your host and port for the sample REST API instance of your choice.",
+                                        "properties": {
+                                            "host": {
+                                                "type": "string",
+                                                "description": "Host name of the Sample API service that is running."
+                                            },
+                                            "port": {
+                                                "type": "number",
+                                                "description": "Port for the Sample API service that is running.",
+                                                "default": 10080
+                                            },
+                                            "user": {
+                                                "type": "string",
+                                                "description": "User name for authenticating connections to the Sample API service that is running."
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "description": "Password for authenticating connections to the Sample API service that is running."
+                                            },
+                                            "basePath": {
+                                                "type": "string",
+                                                "description": "The base path for your API mediation layer instance. Specify this option to prepend the base path to all resources when making REST requests. Do not specify this option if you are not using an API mediation layer."
+                                            },
+                                            "rejectUnauthorized": {
+                                                "type": "boolean",
+                                                "description": "Reject self-signed certificates.",
+                                                "default": true
+                                            },
+                                            "protocol": {
+                                                "type": "string",
+                                                "description": "Specifies protocol to use for Sample connection (http or https).",
+                                                "default": "https",
+                                                "enum": [
+                                                    "http",
+                                                    "https"
+                                                ]
+                                            }
+                                        },
+                                        "required": []
+                                    },
+                                    "secure": {
+                                        "prefixItems": {
+                                            "enum": [
+                                                "user",
+                                                "password"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "type": {
+                                        "const": "base"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "properties": {
+                                        "type": "object",
+                                        "title": "Base Profile",
+                                        "description": "Base profile that stores values shared by multiple service profiles",
+                                        "properties": {
+                                            "host": {
+                                                "type": "string",
+                                                "description": "Host name of service on the mainframe."
+                                            },
+                                            "port": {
+                                                "type": "number",
+                                                "description": "Port number of service on the mainframe."
+                                            },
+                                            "user": {
+                                                "type": "string",
+                                                "description": "User name to authenticate to service on the mainframe."
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "description": "Password to authenticate to service on the mainframe."
+                                            },
+                                            "rejectUnauthorized": {
+                                                "type": "boolean",
+                                                "description": "Reject self-signed certificates.",
+                                                "default": true
+                                            },
+                                            "tokenType": {
+                                                "type": "string",
+                                                "description": "The type of token to get and use for the API. Omit this option to use the default token type, which is provided by 'zowe auth login'."
+                                            },
+                                            "tokenValue": {
+                                                "type": "string",
+                                                "description": "The value of the token to pass to the API."
+                                            }
+                                        },
+                                        "required": []
+                                    },
+                                    "secure": {
+                                        "prefixItems": {
+                                            "enum": [
+                                                "user",
+                                                "password",
+                                                "tokenValue"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "defaults": {
+            "type": "object",
+            "description": "default profiles config",
+            "properties": {
+                "zosmf": {
+                    "type": "string"
+                },
+                "tso": {
+                    "type": "string"
+                },
+                "ssh": {
+                    "type": "string"
+                },
+                "idms": {
+                    "type": "string"
+                },
+                "sysview": {
+                    "type": "string"
+                },
+                "sysview-format": {
+                    "type": "string"
+                },
+                "rse": {
+                    "type": "string"
+                },
+                "mq": {
+                    "type": "string"
+                },
+                "jclcheck": {
+                    "type": "string"
+                },
+                "qwikref": {
+                    "type": "string"
+                },
+                "ebg": {
+                    "type": "string"
+                },
+                "zftp": {
+                    "type": "string"
+                },
+                "endevor": {
+                    "type": "string"
+                },
+                "endevor-location": {
+                    "type": "string"
+                },
+                "sample": {
+                    "type": "string"
+                },
+                "base": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

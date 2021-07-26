@@ -1,0 +1,36 @@
+{
+  "name": "sample-plugin-for-zowe-cli",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "EPL-2.0",
+  "dependencies": {
+    "@zowe/imperative": "^4.0.0",
+    "api": "1.0.0"
+  },
+  "files": [
+    "lib"
+  ],
+  "devDependencies": {
+    "@types/node": "^16.4.1",
+    "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^24.4.0",
+    "husky": "^7.0.1",
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2",
+    "typescript": "^4.3.5"
+  },
+  "peerDependencies": {
+    "@zowe/imperative": "^4.0.0"
+  },
+  "imperative": {
+    "configurationModule": "lib/imperative.js"
+  }
+}

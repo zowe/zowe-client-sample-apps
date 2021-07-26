@@ -1,0 +1,22 @@
+{
+  "name": "zowe-sample-client-templates",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext ts",
+    "prettier": "prettier packages/*/src/**/*.ts --write",
+    "compile": "tsc -b",
+    "license": "license.sh",
+    "build": "npm run license && npm run prettier && npm run lint && npm run compile && npm run test",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "EPL-2.0"
+}
