@@ -6,8 +6,11 @@ module.exports = {
     'jest'
   ],
   parserOptions: {
-    tsconfigRootDir: __dirname,
-    project: ['./tsconfig.json', './packages/*/tsconfig.json'],
+    project: [
+      './tsconfig.json',
+      './packages/*/tsconfig.json',
+      './packages/*/tsconfig.eslint.json' // eslint complains `The file does not match your project config` && `The file must be included in at least one of the projects provided`
+    ],
   },
   extends: [
     'eslint:recommended',
