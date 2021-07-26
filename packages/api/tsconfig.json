@@ -1,11 +1,11 @@
 {
-    "extends": "../../tsconfig.json",
-    "compilerOptions": {
-      "rootDir": "src",
-      "outDir": "lib"
-    },
-    "include": [
-      "src"
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib",
+  },
+  "include": [
+    "src"
   ],
-    // "references": [{ "path": "../x-core" }]
-  }
+  // "references": [{ "path": "../x-core" }]
+}

@@ -6,8 +6,8 @@ module.exports = {
     'jest'
   ],
   parserOptions: {
-    // tsconfigRootDir: __dirname,
-    project: ['./packages/*/tsconfig.json'],
+    tsconfigRootDir: __dirname,
+    project: ['./tsconfig.json', './packages/*/tsconfig.json'],
   },
   extends: [
     'eslint:recommended',
@@ -15,6 +15,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     "prettier"
   ],
+  ignorePatterns: ['.eslintrc.js'],
   env: {
     'jest/globals': true,
     'node': true,

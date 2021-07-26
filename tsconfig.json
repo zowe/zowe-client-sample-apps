@@ -10,9 +10,15 @@
     // "rootDir": "src",
     "sourceMap": true,
     "composite": true,
+    // "typeRoots": [
+    //   "jest"
+    // ]
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "**/__tests__/*"
   ],
   "references": [
     {
