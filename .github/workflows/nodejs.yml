@@ -29,13 +29,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-
-    - name: list
-      run: ls -la
-
     - name: Use NPM v7
       id: npm7
       run: npm install -g npm@^7
+
+    - name: Make executable
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
+      run: chmod -x license.sh
 
     - name: Install Node Package Dependencies
       id: install
