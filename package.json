@@ -12,7 +12,7 @@
     "lint": "eslint . --ext ts",
     "prettier": "prettier packages/*/src/**/*.ts --write",
     "compile": "tsc -b",
-    "license": "license.sh",
+    "license": "sh license.sh",
     "build": "npm run license && npm run prettier && npm run compile && npm run lint && npm test --workspaces",
     "prepare": "husky install"
   },
