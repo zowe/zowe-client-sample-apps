@@ -17,12 +17,12 @@ Requires running the [Zowe Sample API Service](https://github.com/zowe/sample-sp
 * comments
 * tests
 * localization
-* should workspaces each have devdependencies?
-* individual scripts for prettier & eslint??
+* webpack (sample vs code extensions)
+* zowe explorer profile creation registration
+* change package names
 
 ## Building
 
 1. `git clone https://github.com/dkelosky/zowe-client-templates`
 2. `npm install`
 3. `npm run build`
-
