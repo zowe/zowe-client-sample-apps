@@ -8,12 +8,12 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no root tests\" && exit 1",
     "lint": "eslint . --ext ts",
     "prettier": "prettier packages/*/src/**/*.ts --write",
     "compile": "tsc -b",
     "license": "license.sh",
-    "build": "npm run license && npm run prettier && npm run lint && npm run compile && npm run test",
+    "build": "npm run license && npm run prettier && npm run compile && npm run lint && npm test --workspaces",
     "prepare": "husky install"
   },
   "keywords": [],

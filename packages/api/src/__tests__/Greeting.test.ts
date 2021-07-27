@@ -8,10 +8,8 @@
  * Copyright Contributors to the Zowe Project.
  */
 
-
 describe("Greeting tests", () => {
-    it("should return 'Hello'", () => {
-
-        expect(true).toBe(true);
-    });
+  it("should return 'Hello'", () => {
+    expect(true).toBe(true);
+  });
 });

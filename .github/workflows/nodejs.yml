@@ -41,6 +41,10 @@ jobs:
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: ls -la
 
+    - name: List
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
+      run: cat license.sh
+
     - name: Install Node Package Dependencies
       id: install
       run: npm install
