@@ -1,5 +1,5 @@
 {
-  "name": "sample-plugin-for-zowe-cli",
+  "name": "@zowe/sample-for-zowe-cli",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -12,7 +12,7 @@
   "license": "EPL-2.0",
   "dependencies": {
     "@zowe/imperative": "^5.0.0-next.202107122104",
-    "api": "1.0.0"
+    "@zowe/sample-for-zowe-sdk": "1.0.0"
   },
   "files": [
     "lib"

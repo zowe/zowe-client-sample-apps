@@ -12,6 +12,8 @@ export async function getSession(profileType: string): Promise<Session> {
     return ProfileInfo.createSession(profAttrs);
 }
 
+// https://github.com/zowe/vscode-extension-for-zowe/commit/f47416e8e274d8d453f6e6468872b62ecf1f7a1d
+
 export async function getProfileAttrs(profileType: string): Promise<IProfArgAttrs[]> {
     // Require Keytar which is a dependency for loading secure credentials from OS vault.
     // See https://code.visualstudio.com/api/advanced-topics/remote-extensions#persisting-secrets

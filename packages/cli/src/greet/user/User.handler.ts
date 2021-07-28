@@ -8,7 +8,7 @@
  * Copyright Contributors to the Zowe Project.
  */
 
-import { Greeting, IGreeting } from "api";
+import { Greeting, IGreeting } from "@zowe/sample-for-zowe-sdk";
 import BaseHandler from "../Base.handler";
 import { IHandlerParameters } from "@zowe/imperative";
 

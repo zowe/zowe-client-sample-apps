@@ -81,9 +81,10 @@ See more information [here](./packages/vsce/README.md).
 * localization
 * webpack (sample vs code extensions)
 * zowe explorer profile creation registration
-* change package names
 * theia
 * handle missing schema
 * obtaining updates
-* error handling
-* other extension types
+* error handling in zowe explorer
+* other extension types, e.g. extend tree menu
+* remove `@zowe/cli` dependency for `vsce` package
+* [conformance](https://github.com/zowe/vscode-extension-for-zowe/blob/62e4eb21302ca3fde479dfe0210aa51831b0ebc3/docs/README-Conformance.md)

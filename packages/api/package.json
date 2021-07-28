@@ -1,5 +1,5 @@
 {
-  "name": "api",
+  "name": "@zowe/sample-for-zowe-sdk",
   "version": "1.0.0",
   "description": "",
   "private": true,
