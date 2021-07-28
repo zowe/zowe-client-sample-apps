@@ -1,5 +1,9 @@
 # Zowe Client Sample Apps
 
+## CASE
+
+Cli plugin, Api on z/OS, SDK in javascript, Extension for VScode
+
 Sample client applications for:
 
 * npm / API package
@@ -11,6 +15,12 @@ Requires running the [Zowe Sample API Service](https://github.com/zowe/sample-sp
 ## Prerequisites
 
 `npm` version `7.20+` (`npm install -g npm`)
+
+## Building
+
+1. `git clone https://github.com/dkelosky/zowe-client-templates`
+2. `npm install`
+3. `npm run build`
 
 ## Models
 
@@ -30,14 +40,3 @@ Requires running the [Zowe Sample API Service](https://github.com/zowe/sample-sp
 * change package names
 * theia
 * handle missing schema
-
-## Building
-
-1. `git clone https://github.com/dkelosky/zowe-client-templates`
-2. `npm install`
-3. `npm run build`
-
-
-## CASE
-
-Cli plugin, Api on z/OS, SDK in javascript, Extension for VScode
