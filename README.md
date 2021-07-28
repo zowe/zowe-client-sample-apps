@@ -1,18 +1,18 @@
 # Zowe Client Sample Apps
 
+Sample Zowe Client applications which connect and use a sample REST API service and adhere to Zowe
+conformance standards.
+
+Also known as...
+
 ## CASE
 
-Cli plugin, Api on z/OS, SDK in javascript, Extension for VScode
+* [Cli plugin](#cli-plugin) - Extends Zowe CLI with an installable plugin
+* [Api on z/OS](#api-on-zos) - Creates REST API for a mainframe services
+* [SDK in javascript](#sdk) - Client, reusable npm published code
+* [Extension for VScode](#extension-for-vs-code) - Extends Zowe Explorer
 
-Sample client applications for:
-
-* npm / API package
-* Zowe CLI plugin
-* Zowe Explorer (and VS Code) Extension
-
-Requires running the [Zowe Sample API Service](https://github.com/zowe/sample-spring-boot-api-service/tree/master/zowe-rest-api-sample-spring#zowe-sample-api-service).
-
-## Prerequisites
+## Building Prerequisites
 
 `npm` version `7.20+` (`npm install -g npm`)
 
@@ -22,7 +22,51 @@ Requires running the [Zowe Sample API Service](https://github.com/zowe/sample-sp
 2. `npm install`
 3. `npm run build`
 
-## Models
+## CLI Plugin
+
+A sample Zowe CLI plugin which calls the sample Zowe REST API.
+
+![images](./packages/cli/doc/images/cli.png)
+
+See more information [here](./packages/cli/README.md).
+
+## API on zOS
+
+The Zowe Sample API Service helps you build a new, Zowe-conformant REST API .
+
+See more information [here](https://github.com/zowe/sample-spring-boot-api-service/tree/master/zowe-rest-api-sample-spring#zowe-sample-api-service).
+
+## SDK
+
+TypeScript / JavaScript SDK to make your service callable via Node.js applications / scripts. The SDK supports both the Zowe CLI plugins as well as Zowe Explorer VS Code Extensions.
+
+```typescript
+
+import { Greeting } from "@zowe/sample-for-zowe-cli";
+...
+
+```
+
+See more information [here](./packages/api/README.md).
+
+## Extension for VS Code
+
+Allows for graphical interactions to z/OS services.
+
+![images](./packages/vsce/doc/images/vsce.png)
+
+See more information [here](./packages/vsce/README.md).
+
+## Attributes
+
+1. VS Code Extension & Zowe CLI plugin shared config
+2. Testing skeleton
+3. GitHub Actions (CI) skeleton
+4. Husky commit hooks
+5. Lint configurations
+6. Prettier setup
+
+## Deployment Models
 
 * Zowe Explorer installed or not
 * API ML active or not
@@ -40,3 +84,6 @@ Requires running the [Zowe Sample API Service](https://github.com/zowe/sample-sp
 * change package names
 * theia
 * handle missing schema
+* obtaining updates
+* error handling
+* other extension types
