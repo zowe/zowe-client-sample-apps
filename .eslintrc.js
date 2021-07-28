@@ -22,5 +22,9 @@ module.exports = {
   env: {
     'jest/globals': true,
     'node': true,
+  },
+  rules: {
+    // TODO(Kelosky): we can disable this
+    "@typescript-eslint/restrict-template-expressions": ["warn", { "allowBoolean": true }]
   }
 };
