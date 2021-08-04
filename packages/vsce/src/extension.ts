@@ -3,17 +3,13 @@
  * * Eclipse Public License v2.0, available at https://www.eclipse.org/legal/epl-v20.html, OR
  * * Apache License, version 2.0, available at http://www.apache.org/licenses/LICENSE-2.0
  *
- * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
- *
- * Copyright Contributors to the Zowe Project.
- */
-
-/**
- * SPDX-License-Identifier: MIT
- *
  * The original repository for the VS Code Extension can be found here: https://github.com/microsoft/vscode-generator-code/tree/main/generators/app/templates/ext-command-ts
  *
  * The original license for the VS Code Extension can be found here: https://github.com/microsoft/vscode-generator-code/blob/main/LICENSE
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0 OR MIT
+ *
+ * Copyright Contributors to the Zowe Project.
  */
 
 // The module 'vscode' contains the VS Code extensibility API
@@ -23,6 +19,8 @@ import { getSession } from "./profiles";
 import { Greeting } from "@zowe/sample-for-zowe-sdk";
 import { Utils } from "@zowe/sample-for-zowe-cli";
 import { ZoweVsCodeExtension } from "@zowe/zowe-explorer-api";
+
+// https://github.com/zowe/vscode-extension-for-zowe/pull/1419/files
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed

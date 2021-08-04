@@ -3,3 +3,4 @@ lib/
 *.tsbuildinfo
 out/
 _
+coverage
