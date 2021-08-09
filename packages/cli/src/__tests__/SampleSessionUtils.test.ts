@@ -8,8 +8,15 @@
  * Copyright Contributors to the Zowe Project.
  */
 
+import { SampleSessionUtils } from "../SampleSessionUtils";
+import { Utils } from "../Utils";
+
 describe("SampleSessionUtils tests", () => {
   it("should test getting a session from our utils", () => {
-    expect(true).toBe(true);
+    expect(SampleSessionUtils.SAMPLE_CONNECTION_OPTION_GROUP).toMatch(
+      "Sample Connection Options"
+    );
+    expect(SampleSessionUtils.SAMPLE_CONNECTION_OPTIONS).toBeDefined();
+    expect(Utils.getProfileMeta()).toBeTruthy();
   });
 });
