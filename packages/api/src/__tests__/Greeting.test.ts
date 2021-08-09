@@ -7,9 +7,13 @@
  *
  * Copyright Contributors to the Zowe Project.
  */
+import { Greeting } from "../Greeting";
 
 describe("Greeting tests", () => {
   it("should return 'Hello'", () => {
-    expect(true).toBe(true);
+    expect(Greeting.QUERY).toMatch("?name=");
+    expect(Greeting.context).toContain("api/v1/");
+    expect(Greeting.contentResource).toContain("greeting");
   });
 });
+
