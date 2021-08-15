@@ -50,11 +50,11 @@ export async function activate(
 
     async () => {
       console.log(`Fallback to get profiles`);
-      const user = await vscode.window.showInputBox({
+      const user = (await vscode.window.showInputBox({
         // Prompt for InputBox for the user to Enter his Name
         prompt: "Enter Name ",
         placeHolder: "Enter your name ",
-      });
+      })) as string;
       try {
         const session = await getSession("sample");
         const resp = await Greeting.greet(session);
@@ -67,12 +67,12 @@ export async function activate(
           void vscode.window.showInformationMessage(subdata + "User");
         } else {
           // Prints "Hello" along with the user input(name)
-          void vscode.window.showInformationMessage(subdata + `${user}`);
+          void vscode.window.showInformationMessage(subdata + user);
         }
         // Handle the error that may occur and inform the user on what he needs to do
       } catch (err) {
         return vscode.window.showErrorMessage(
-          "Error! You need to have [Zowe Sample API Service](https://github.com/zowe/sample-spring-boot-api-service/blob/master/zowe-rest-api-sample-spring/README.md) running, and you have to create the [zowe.config.json](https://github.com/zowe/zowe-client-sample-apps/blob/master/zowe.config.json) and [zowe.schema.json](https://github.com/zowe/zowe-client-sample-apps/blob/master/zowe.schema.json) files and have them opened"
+          "Error! You need to have [Zowe Sample API Service](https://github.com/zowe/sample-spring-boot-api-service/blob/master/zowe-rest-api-sample-spring/README.md) running, You also need to create and open [zowe.config.json](https://github.com/zowe/zowe-client-sample-apps/blob/master/zowe.config.json) and [zowe.schema.json](https://github.com/zowe/zowe-client-sample-apps/blob/master/zowe.schema.json) files"
         );
       }
     }
