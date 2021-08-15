@@ -12,6 +12,7 @@
     "lint": "eslint . --ext ts",
     "prettier": "prettier packages/*/src/**/*.ts --write",
     "compile": "tsc -b",
+    "watch": "tsc -watch -p ./",
     "license": "sh license.sh",
     "build": "npm run license && npm run prettier && npm run compile && npm run lint",
     "prepare": "husky install"
