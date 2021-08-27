@@ -3,9 +3,7 @@
 Sample Zowe Client applications which connect and use a sample REST API service and adhere to Zowe
 conformance standards.
 
-Also known as...
-
-## CASE
+## Clients
 
 * [Cli plugin](#cli-plugin) - Extends Zowe CLI with an installable plugin
 * [Api on z/OS](#api-on-zos) - Creates REST API for a mainframe services
