@@ -18,7 +18,7 @@ Also known as...
 
 ## Building
 
-1. `git clone https://github.com/dkelosky/zowe-client-templates`
+1. `git clone https://github.com/zowe/zowe-client-sample-apps`
 2. `npm install`
 3. `npm run build`
 
