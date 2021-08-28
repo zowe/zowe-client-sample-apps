@@ -72,7 +72,7 @@ export async function activate(
         // Handle the error that may occur and inform the user on what he needs to do
       } catch (err) {
         return vscode.window.showErrorMessage(
-          "Error! You need to have [Zowe Sample API Service](https://github.com/zowe/sample-spring-boot-api-service/blob/master/zowe-rest-api-sample-spring/README.md) running, You also need to create and open [zowe.config.json](https://github.com/zowe/zowe-client-sample-apps/blob/master/zowe.config.json) and [zowe.schema.json](https://github.com/zowe/zowe-client-sample-apps/blob/master/zowe.schema.json) files"
+          "Error! You need to have [Zowe Sample API Service](https://github.com/zowe/sample-spring-boot-api-service/blob/master/zowe-rest-api-sample-spring/README.md) running, You also need to open a config folder which can be found in the worskpace folder containing [zowe.config.json](https://github.com/zowe/zowe-client-sample-apps/blob/master/zowe.config.json) and [zowe.schema.json](https://github.com/zowe/zowe-client-sample-apps/blob/master/zowe.schema.json) files"
         );
       }
     }
