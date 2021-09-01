@@ -59,15 +59,15 @@ export async function activate(
         const session = await getSession("sample");
         const resp = await Greeting.greet(session);
         // The content called from Zowe Sample API Service Greeting API
-        const data = resp.content;
-        // Extracting "Hello" from the content
-        const subdata = data.substr(0, 5) + data[6];
+        const ExpectedString = resp.content;
+        // Extracting "Hello" from ExpectedString and expecting ExpectedString_2 to contain "Hello"
+        const ExpectedString_2 = ExpectedString.substr(0, ExpectedString.length - 6);
         if (user === "") {
           // Prints "Hello User" if no name has been entered by the user
-          void vscode.window.showInformationMessage(subdata + "User");
+          void vscode.window.showInformationMessage(ExpectedString_2 + "User");
         } else {
           // Prints "Hello" along with the user input(name)
-          void vscode.window.showInformationMessage(subdata + user);
+          void vscode.window.showInformationMessage(ExpectedString_2 + user);
         }
         // Handle the error that may occur and inform the user on what he needs to do
       } catch (err) {
