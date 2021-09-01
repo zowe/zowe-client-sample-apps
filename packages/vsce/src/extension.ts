@@ -60,7 +60,7 @@ export async function activate(
         const resp = await Greeting.greet(session);
         // The content called from Zowe Sample API Service Greeting API
         const expectedString = resp.content;
-        // Extracting "Hello" from ExpectedString and expecting ExpectedString_2 to contain "Hello"
+        // Extracting "Hello" from expectedString and expecting subexpectedString to contain "Hello"
         const subexpectedString = expectedString.substr(0, expectedString.length - 6);
         if (user === "") {
           // Prints "Hello User" if no name has been entered by the user
