@@ -61,7 +61,8 @@ export async function activate(
         // The content called from Zowe Sample API Service Greeting API
         const expectedString = resp.content;
         // Extracting "Hello" from expectedString and expecting subexpectedString to contain "Hello"
-        const subexpectedString = expectedString.substr(0, expectedString.length - 6);
+        const hello = "Hello";
+        const subexpectedString = expectedString.substr(0, expectedString.length - hello.length);
         if (user === "") {
           // Prints "Hello User" if no name has been entered by the user
           void vscode.window.showInformationMessage(subexpectedString + "User");
