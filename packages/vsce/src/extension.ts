@@ -3,13 +3,17 @@
  * * Eclipse Public License v2.0, available at https://www.eclipse.org/legal/epl-v20.html, OR
  * * Apache License, version 2.0, available at http://www.apache.org/licenses/LICENSE-2.0
  *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ *
+ * Copyright Contributors to the Zowe Project.
+ */
+
+/**
+ * SPDX-License-Identifier: MIT
+ *
  * The original repository for the VS Code Extension can be found here: https://github.com/microsoft/vscode-generator-code/tree/main/generators/app/templates/ext-command-ts
  *
  * The original license for the VS Code Extension can be found here: https://github.com/microsoft/vscode-generator-code/blob/main/LICENSE
- *
- * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0 OR MIT
- *
- * Copyright Contributors to the Zowe Project.
  */
 
 // The module 'vscode' contains the VS Code extensibility API
@@ -19,8 +23,6 @@ import { getSession } from "./profiles";
 import { Greeting } from "@zowe/sample-for-zowe-sdk";
 import { Utils } from "@zowe/sample-for-zowe-cli";
 import { ZoweVsCodeExtension } from "@zowe/zowe-explorer-api";
-
-// https://github.com/zowe/vscode-extension-for-zowe/pull/1419/files
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -45,11 +47,35 @@ export async function activate(
 
   const disposable = vscode.commands.registerCommand(
     "vsce.helloWorld",
+
     async () => {
       console.log(`Fallback to get profiles`);
-      const session = await getSession("sample");
-      const resp = await Greeting.greet(session);
-      void vscode.window.showInformationMessage(resp.content);
+      const user = (await vscode.window.showInputBox({
+        // Prompt for InputBox for the user to Enter his Name
+        prompt: "Enter Name ",
+        placeHolder: "Enter your name ",
+      })) as string;
+      try {
+        const session = await getSession("sample");
+        const resp = await Greeting.greet(session);
+        // The content called from Zowe Sample API Service Greeting API
+        const expectedString = resp.content;
+        // Extracting "Hello" from expectedString and expecting subexpectedString to contain "Hello"
+        const hello = "Hello";
+        const subexpectedString = expectedString.substr(0, expectedString.length - hello.length);
+        if (user === "") {
+          // Prints "Hello User" if no name has been entered by the user
+          void vscode.window.showInformationMessage(subexpectedString + "User");
+        } else {
+          // Prints "Hello" along with the user input(name)
+          void vscode.window.showInformationMessage(subexpectedString + user);
+        }
+        // Handle the error that may occur and inform the user on what he needs to do
+      } catch (err) {
+        return vscode.window.showErrorMessage(
+          "Error! You need to have [Zowe Sample API Service](https://github.com/zowe/sample-spring-boot-api-service/blob/master/zowe-rest-api-sample-spring/README.md) running, You also need to open a config folder which can be found in the worskpace folder containing [zowe.config.json](https://github.com/zowe/zowe-client-sample-apps/blob/master/zowe.config.json) and [zowe.schema.json](https://github.com/zowe/zowe-client-sample-apps/blob/master/zowe.schema.json) files"
+        );
+      }
     }
   );
 
